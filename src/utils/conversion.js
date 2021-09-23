@@ -60,12 +60,9 @@ const inspectLines = (line) => {
 };
 
 const headerConverter = (headerLine) => {
-  let hNumSliceIndex = getNumHashtags(headerLine);
-  // if (headerLine[hNum + 1] !== ' ') {
-  //   return paragraphConverter(headerLine);
-  // }
-  let returnString = headerLine.slice(hNumSliceIndex);
 
+  let hNumSliceIndex = getNumHashtags(headerLine);
+  let returnString = headerLine.slice(hNumSliceIndex);
   if (headerLine[hNumSliceIndex] === ' ') {
     returnString = headerLine.slice(hNumSliceIndex + 1);
   }
@@ -107,16 +104,13 @@ const inlineConversion = (line) => {
   const splitEndIndex = line.indexOf(')') + 1;
   const beginningStr = line.slice(0, splitBegIndex);
   const inlineLink = line.slice(splitBegIndex, splitEndIndex);
-  //[Link text](https://www.example.com)
+
 
   let endStr = line.slice(splitEndIndex);
-  // check if the link has another [ and recursively call itself if so
 
   let finalDataArray = inlineLink.split('](');
-  console.log(finalDataArray);
   let linkText = finalDataArray[0].slice(1);
   let address = finalDataArray[1].slice(0, -1);
-
   let returnAnchor = `<a href="${address}">${linkText}</a>`;
 
   if (endStr.includes('](') && endStr.includes('[') && endStr.includes(')')) {
